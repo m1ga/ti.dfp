@@ -1,0 +1,1 @@
+This is a Titanium Mobile module for displaying DFP ads in your app.  I started with Appcelerator's admob module, followed a few things that Wienke Giezeman (https://github.com/wienke/) did to add DFP support, updated to the latest Google Mobile Ads SDK and Google Play Services, and then brought the APIs for iOS and android into sync.
