@@ -1,0 +1,17 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+description: dfp
+author: Jason Priebe
+license: Apache License, Version 2.0
+copyright: Copyright (c) 2014, Jason Priebe
+
+# these should not be edited
+name: dfp
+moduleid: ti.dfp
+guid: bc1a28ac-353d-47bc-bc54-fb9bf7387a36
+platform: android
+minsdk: 3.3.0.GA
