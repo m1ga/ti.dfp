@@ -1,0 +1,14 @@
+1.0.1 - November 18, 2014
+
+- Android: Updated to version 20 of google play services to match ti.cloudpush
+
+- Android: Better exception handling
+
+- Android: Moved most log calls to debug level
+
+- iOS: updated to version 6.12.2 of Google Mobile Ads SDK for iOS
+
+
+1.0.0 - September 16, 2014
+
+ - initial release
