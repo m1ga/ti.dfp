@@ -7,13 +7,14 @@
 	<iphone>
 	</iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>14</tool-api-level>
+        <tool-api-level>19</tool-api-level>
         <manifest>
+            <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19"/>
             <application>
                 <activity android:name="com.google.android.gms.ads.AdActivity"
                           android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
                 <meta-data android:name="com.google.android.gms.version"
-                           android:value="4132500"/>
+                           android:value="6171000"/>
             </application>
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>

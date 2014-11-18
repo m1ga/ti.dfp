@@ -32,63 +32,74 @@ public class View extends TiUIView {
 
 	public View(final TiViewProxy proxy) {
 		super(proxy);
-		Log.d (TAG, "Creating an adMob ad view");
+		Log.d (TAG, "Creating DFP adview...");
 	}
 
 	private void createView() {
 
-
-		Log.d (TAG, "createView()");
-        // create the adView
-        adView = new PublisherAdView(proxy.getActivity());
-        if ((DfpModule.ADWIDTH > 0) && (DfpModule.ADHEIGHT > 0))
+        try
         {
-            Log.e(TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID 
-                + ", size: " + DfpModule.ADWIDTH 
-                + "x" + DfpModule.ADHEIGHT);
+		    Log.d (TAG, "createView()");
+            // create the adView
+            adView = new PublisherAdView(proxy.getActivity());
 
-		    AdSize adsize = new AdSize(DfpModule.ADWIDTH, DfpModule.ADHEIGHT);
-		    adView.setAdSizes(adsize);
-        }
-        else
-        {
-            Log.e(TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: SMART_BANNER");
-		    adView.setAdSizes(AdSize.SMART_BANNER);
-        }
-		adView.setAdUnitId(DfpModule.ADUNIT_ID);
+            if ((DfpModule.ADWIDTH > 0) && (DfpModule.ADHEIGHT > 0))
+            {
+                Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID 
+                    + ", size: " + DfpModule.ADWIDTH 
+                    + "x" + DfpModule.ADHEIGHT);
 
-		// set the listener
-		adView.setAdListener(new AdListener() {
-			public void onAdLoaded() {
-				Log.d (TAG, "onAdLoaded()");
-				proxy.fireEvent("ad_received", new KrollDict());
-			}
+		        AdSize adsize = new AdSize(DfpModule.ADWIDTH, DfpModule.ADHEIGHT);
+		        adView.setAdSizes(adsize);
+            }
+            else
+            {
+                Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: SMART_BANNER");
+		        adView.setAdSizes(AdSize.SMART_BANNER);
+            }
+		    adView.setAdUnitId(DfpModule.ADUNIT_ID);
+
+		    // set the listener
+		    adView.setAdListener(new AdListener() {
+			    public void onAdLoaded() {
+				    Log.d (TAG, "onAdLoaded()");
+				    proxy.fireEvent("ad_received", new KrollDict());
+			    }
 			
-			public void onAdFailedToLoad(int errorCode) {
-				Log.d (TAG, "onAdFailedToLoad(): " + errorCode);
-				proxy.fireEvent("ad_not_received", new KrollDict());
-			}
+			    public void onAdFailedToLoad(int errorCode) {
+				    Log.d (TAG, "onAdFailedToLoad(): " + errorCode);
+				    proxy.fireEvent("ad_not_received", new KrollDict());
+			    }
 
-			public void onAdOpened () {
-				Log.d (TAG, "onAdOpened()");
-				proxy.fireEvent("ad_opened", new KrollDict());
-			}
+			    public void onAdOpened () {
+				    Log.d (TAG, "onAdOpened()");
+				    proxy.fireEvent("ad_opened", new KrollDict());
+			    }
 
-			public void onAdClosed () {
-				Log.d (TAG, "onAdClosed()");
-				proxy.fireEvent("ad_closed", new KrollDict());
-			}
+			    public void onAdClosed () {
+				    Log.d (TAG, "onAdClosed()");
+				    proxy.fireEvent("ad_closed", new KrollDict());
+			    }
 
-			public void onAdLeftApplicadtion () {
-				Log.d (TAG, "onAdLeftApplicadtion()");
-				proxy.fireEvent("leave_application", new KrollDict());
-			}
-		});
-		adView.setPadding(prop_left, prop_top, prop_right, 0);
-		// Add the AdView to your view hierarchy.
-		// The view will have no size until the ad is loaded.
-		setNativeView(adView);
-		loadAd();
+			    public void onAdLeftApplicadtion () {
+				    Log.d (TAG, "onAdLeftApplicadtion()");
+				    proxy.fireEvent("leave_application", new KrollDict());
+			    }
+		    });
+		    adView.setPadding(prop_left, prop_top, prop_right, 0);
+		    // Add the AdView to your view hierarchy.
+		    // The view will have no size until the ad is loaded.
+		    setNativeView(adView);
+		    loadAd();
+        }
+        catch (IllegalStateException e)
+        {
+		    Log.w (TAG, "EXCEPTION (IllegalStateException): " + e.getMessage ());
+        }
+        catch (Exception e)
+        {
+		    Log.w (TAG, "EXCEPTION: " + e.getMessage ());
+        }
 	}
 
 	// load the adMob ad
