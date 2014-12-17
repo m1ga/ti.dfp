@@ -29,8 +29,8 @@
         RELEASE_TO_NIL(ad);
     }
     
-    int width = [TiUtils intValue:[self.proxy valueForKey:@"width"] def:0];
-    int height = [TiUtils intValue:[self.proxy valueForKey:@"height"] def:0];
+    int width = [TiUtils intValue:[self.proxy valueForKey:@"adWidth"] def:0];
+    int height = [TiUtils intValue:[self.proxy valueForKey:@"adHeight"] def:0];
 
     if ((width > 0) && (height > 0))
     {
@@ -43,7 +43,14 @@
     {
         NSLog(@"[DEBUG] [TiDfpView] ad size: SMART_BANNER");
         
-        ad = [[DFPBannerView alloc] initWithFrame:bounds];
+        if (width>=height)
+        {
+            ad = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+        }
+        else
+        {
+            ad = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape];
+        }
     }
     
     if ([TiUtils boolValue:[self.proxy valueForKey:@"suppressScroll"] def:NO])
