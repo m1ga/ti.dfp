@@ -10,10 +10,15 @@
 #import "GADBannerViewDelegate.h"
 #import "GADAdMobExtras.h"
 
-@interface TiDfpView : TiUIView<GADBannerViewDelegate> {
+@protocol GADAdSizeDelegate <NSObject>
+- (void)adView:(DFPBannerView *)view willChangeAdSizeTo:(GADAdSize)size;
+@end
+
+@interface TiDfpView : TiUIView<GADBannerViewDelegate, GADAdSizeDelegate> {
 
 @private
-	GADBannerView *ad;
+	DFPBannerView *ad;
+    BOOL autoResize;
 }
 
 @end
