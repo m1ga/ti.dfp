@@ -80,6 +80,18 @@ A dictionary with the location of the user for location-based ads:
 
 A dictionary with custom key-value pairs used for targeting ads.
 
+### array adSizes (optional)
+
+An array of dictionaries to set the [MultipleAdSizes](https://developers.google.com/mobile-ads-sdk/docs/dfp/android/banner#multiple).
+
+```javascript
+[
+    {width: 320, height: 100},
+    {width: 320, height: 50}
+]
+```
+
+
 ## Events
 
 ### ad_received
