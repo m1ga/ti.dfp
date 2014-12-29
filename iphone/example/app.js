@@ -18,6 +18,13 @@ var dfpView = dfp.createView({
     // you can explicitly specify an ad size; by default, will use DFP's SMART_BANNER mechanism
     adWidth: 320,
     adHeight: 50,
+    
+    // or you can specify an array of supported ad sizes
+    adSizes: [
+        {width: 320, height: 100},
+        {width: 320, height: 50},
+        {width: 320, height: 240}
+    ],
 
     adBackgroundColor:  "#FF8800", 
     backgroundColorTop: "#738000", 

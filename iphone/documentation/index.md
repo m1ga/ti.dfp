@@ -64,7 +64,18 @@ parameters[object]: a dictionary object of properties defined in [ti.dfp.View][]
 			latitude: 35.779511,
 			longitude:  -78.674045,
 			accuracy: 10
-		}
+		},
+	
+		// Support the following ad sizes (MultipleAdSizes feature of DFP SDK)
+		adSizes: [
+			{ width: 320, height: 100 },
+			{ width: 320, height: 50 },
+			{ width: 300, height: 250 },
+			{ width: 728, height: 90 }
+		],
+	
+		// Resize view to dimensions of the displayed ad
+		autoResize: true
 	});
 
 ## Module History
