@@ -29,8 +29,8 @@
         RELEASE_TO_NIL(ad);
     }
     
-    int width = [TiUtils intValue:[self.proxy valueForKey:@"width"] def:0];
-    int height = [TiUtils intValue:[self.proxy valueForKey:@"height"] def:0];
+    int width = [TiUtils intValue:[self.proxy valueForKey:@"adWidth"] def:0];
+    int height = [TiUtils intValue:[self.proxy valueForKey:@"adHeight"] def:0];
 
     if ((width > 0) && (height > 0))
     {
@@ -78,6 +78,40 @@
     // Let the runtime know which UIViewController to restore after taking
     // the user wherever the ad goes and add it to the view hierarchy.
     ad.rootViewController = [[TiApp app] controller];
+    
+    // Define an optional array of NSDictionary to specify all valid sizes that are appropriate
+    // for this slot. Never create your own GADAdSize directly. Use one of the
+    // predefined standard ad sizes (such as kGADAdSizeBanner), or create one using
+    // the GADAdSizeFromCGSize method.
+    //
+    // Note: Ensure that the allocated DFPBannerView is defined with an ad size. Also note
+    // that all desired sizes should be included in the validAdSizes array.
+    //
+    // JS: adSizes: [
+    //     { width: 320, height: 100 },
+    //     { width: 320, height: 50 }
+    // ]
+    NSArray *adSizes = [self.proxy valueForKey:@"adSizes"];
+    
+    if(adSizes != nil)
+    {
+        NSMutableArray *validSizes = [NSMutableArray array];
+        
+        for (id object in adSizes) {
+            GADAdSize adSize = GADAdSizeFromCGSize(CGSizeMake([[object objectForKey:@"width"] floatValue], [[object objectForKey:@"height"] floatValue]));
+            
+            [validSizes addObject:[NSValue valueWithBytes:&adSize objCType:@encode(GADAdSize)]];
+        }
+      
+        ad.validAdSizes = validSizes;
+    
+        [ad setAdSizeDelegate:self];
+    }
+    
+    // Tell continaer view to auto resize to ad dimensions
+    autoResize = [TiUtils boolValue:[self.proxy valueForKey:@"autoResize"]];
+    
+    NSLog(@"[INFO] [TiDfpView] auroResize set %@", (autoResize ? @"Yes" : @"No"));
     
     // Initiate a generic request to load it with an ad.
     GADRequest* request = [GADRequest request];
@@ -127,7 +161,7 @@
         [additionalParameters setObject:c2 forKey:@"color_bg_top"];
         has_extras = true;
     }
-    c = [self.proxy valueForKey:@"borderColor"];
+    c = [self.proxy valueForKey:@"borderColor2"];
     if (c != nil)
     {
         c2 = [c stringByReplacingOccurrencesOfString:@"#" withString:@""];
@@ -174,12 +208,24 @@
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-    [self refreshAd:bounds];
+    if (ad != nil)
+    {
+        NSLog(@"[INFO] [TiDfpView] frameSizeChanged positionRect %@", NSStringFromCGRect(frame));
+//        [TiUtils setView:ad positionRect:bounds];
+    }
+    else
+    {
+        NSLog(@"[INFO] [TiDfpView] frameSizeChanged refreshAd");
+        [self refreshAd:bounds];
+    }
 }
 
 -(void)dealloc
 {
     if (ad != nil) {
+        ad.adSizeDelegate = nil;
+        ad.delegate = nil;
+        
         [ad removeFromSuperview];
         RELEASE_TO_NIL(ad);
     }
@@ -189,6 +235,22 @@
 #pragma mark -
 #pragma mark Ad Delegate
 
+- (void)adView:(DFPBannerView *)view willChangeAdSizeTo:(GADAdSize)adSize
+{
+    NSLog(@"[INFO] [TiDfpView] willChangeAdSizeTo %@", NSStringFromCGSize(adSize.size));
+    NSLog(@"[INFO] [TiDfpView] auroResize set %@", (autoResize ? @"Yes" : @"No"));
+    
+    // Resize container view if nescessary
+    if(autoResize)
+    {
+        CGRect frame = self.frame;
+        frame.size = adSize.size;
+        self.frame = frame;
+        
+        NSLog(@"[INFO] [TiDfpView] %@", NSStringFromCGRect(self.frame));
+    }
+}
+
 - (void)adViewDidReceiveAd:(GADBannerView *)view
 {
     [self.proxy fireEvent:@"ad_received"];
@@ -197,6 +259,7 @@
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
     NSLog(@"[ERROR] [TiDfpView] FAILURE RECEIVING AD: %@", [error localizedDescription]);
+    
     [self.proxy fireEvent:@"ad_not_received"];
 }
 

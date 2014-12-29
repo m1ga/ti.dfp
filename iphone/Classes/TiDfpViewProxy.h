@@ -14,6 +14,6 @@
 
 }
 
--(void)requestAd;
+-(void)requestAd:(id)args;
 
 @end
