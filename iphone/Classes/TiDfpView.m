@@ -111,7 +111,7 @@
     // Tell continaer view to auto resize to ad dimensions
     autoResize = [TiUtils boolValue:[self.proxy valueForKey:@"autoResize"]];
     
-    NSLog(@"[INFO] [TiDfpView] auroResize set %@", (autoResize ? @"Yes" : @"No"));
+    NSLog(@"[DEBUG] [TiDfpView] auroResize set %@", (autoResize ? @"Yes" : @"No"));
     
     // Initiate a generic request to load it with an ad.
     GADRequest* request = [GADRequest request];
@@ -237,17 +237,14 @@
 
 - (void)adView:(DFPBannerView *)view willChangeAdSizeTo:(GADAdSize)adSize
 {
-    NSLog(@"[INFO] [TiDfpView] willChangeAdSizeTo %@", NSStringFromCGSize(adSize.size));
-    NSLog(@"[INFO] [TiDfpView] auroResize set %@", (autoResize ? @"Yes" : @"No"));
-    
     // Resize container view if nescessary
     if(autoResize)
     {
+        NSLog(@"[DEBUG] [TiDfpView] willChangeAdSizeTo %@", NSStringFromCGSize(adSize.size));
+        
         CGRect frame = self.frame;
         frame.size = adSize.size;
         self.frame = frame;
-        
-        NSLog(@"[INFO] [TiDfpView] %@", NSStringFromCGRect(self.frame));
     }
 }
 
