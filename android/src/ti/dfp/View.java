@@ -16,6 +16,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.android.gms.ads.mediation.admob.AdMobExtras;
 
+import java.lang.reflect.Method;
+
 public class View extends TiUIView {
 	private static final String TAG = "ti.dfp.View";
 	PublisherAdView adView;
@@ -52,17 +54,34 @@ public class View extends TiUIView {
 		        AdSize adsize = new AdSize(DfpModule.ADWIDTH, DfpModule.ADHEIGHT);
 		        adView.setAdSizes(adsize);
             }
+            else if(DfpModule.AD_SIZES != null)
+            {
+                Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: multiple");
+                
+                adView.setAdSizes(DfpModule.AD_SIZES);
+            }
             else
             {
-                Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: SMART_BANNER");
-		        adView.setAdSizes(AdSize.SMART_BANNER);
+                 Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: SMART_BANNER");
+		         adView.setAdSizes(AdSize.SMART_BANNER);
+//
+//                
+////                adView.setAdSizes(new AdSize(320, 100), new AdSize(320, 50));
+//                
+//                
+//                
+//                AdSize[] sizes = new AdSize[2];
+//                sizes[0] = new AdSize(320, 100);
+//                sizes[1] = new AdSize(320, 50);
+//                adView.setAdSizes(sizes);
+                
             }
 		    adView.setAdUnitId(DfpModule.ADUNIT_ID);
 
 		    // set the listener
 		    adView.setAdListener(new AdListener() {
 			    public void onAdLoaded() {
-				    Log.d (TAG, "onAdLoaded()");
+				    Log.d (TAG, "onAdLoaded() " + adView.getWidth() + ", " + adView.getHeight());
 				    proxy.fireEvent("ad_received", new KrollDict());
 			    }
 			
@@ -215,6 +234,25 @@ public class View extends TiUIView {
 			Log.d (TAG, "has PROPERTY_COLOR_URL: " + d.getString(DfpModule.PROPERTY_COLOR_URL));
 			prop_color_url = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_URL));
 		}
+        
+        if (d.containsKey("adSizes")) {
+            Log.d (TAG, "has adSizes:");
+            
+            Object[] adSizes = (Object[]) d.get("adSizes");
+            
+            DfpModule.AD_SIZES = new AdSize[adSizes.length];
+            
+            for (int i = 0; i < adSizes.length; i++)
+            {
+                Map<String,Integer> hm = (Map<String,Integer>) adSizes[i];
+                
+                // You now have a HashMap!
+                Log.d (TAG, "" + hm);
+                
+                DfpModule.AD_SIZES[i] = new AdSize(hm.get("width"), hm.get("height"));
+            }
+        }
+
 
 		// now create the adView
 		this.createView();
