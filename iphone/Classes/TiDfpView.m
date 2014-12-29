@@ -161,7 +161,7 @@
         [additionalParameters setObject:c2 forKey:@"color_bg_top"];
         has_extras = true;
     }
-    c = [self.proxy valueForKey:@"borderColor2"];
+    c = [self.proxy valueForKey:@"borderColor"];
     if (c != nil)
     {
         c2 = [c stringByReplacingOccurrencesOfString:@"#" withString:@""];
