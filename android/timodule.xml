@@ -7,12 +7,11 @@
 	<iphone>
 	</iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>19</tool-api-level>
         <manifest>
-            <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19"/>
             <application>
                 <activity android:name="com.google.android.gms.ads.AdActivity"
-                          android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+                    android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                    android:theme="@android:style/Theme.Translucent" />
                 <meta-data android:name="com.google.android.gms.version"
                            android:value="6171000"/>
             </application>
