@@ -45,7 +45,13 @@ public class View extends TiUIView {
             // create the adView
             adView = new PublisherAdView(proxy.getActivity());
 
-            if ((DfpModule.ADWIDTH > 0) && (DfpModule.ADHEIGHT > 0))
+            if(DfpModule.AD_SIZES != null)
+            {
+                Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: multiple");
+                
+                adView.setAdSizes(DfpModule.AD_SIZES);
+            }
+            else if ((DfpModule.ADWIDTH > 0) && (DfpModule.ADHEIGHT > 0))
             {
                 Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID 
                     + ", size: " + DfpModule.ADWIDTH 
@@ -54,26 +60,10 @@ public class View extends TiUIView {
 		        AdSize adsize = new AdSize(DfpModule.ADWIDTH, DfpModule.ADHEIGHT);
 		        adView.setAdSizes(adsize);
             }
-            else if(DfpModule.AD_SIZES != null)
-            {
-                Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: multiple");
-                
-                adView.setAdSizes(DfpModule.AD_SIZES);
-            }
             else
             {
                  Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: SMART_BANNER");
 		         adView.setAdSizes(AdSize.SMART_BANNER);
-//
-//                
-////                adView.setAdSizes(new AdSize(320, 100), new AdSize(320, 50));
-//                
-//                
-//                
-//                AdSize[] sizes = new AdSize[2];
-//                sizes[0] = new AdSize(320, 100);
-//                sizes[1] = new AdSize(320, 50);
-//                adView.setAdSizes(sizes);
                 
             }
 		    adView.setAdUnitId(DfpModule.ADUNIT_ID);
