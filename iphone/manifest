@@ -4,6 +4,7 @@
 #
 version: 1.0.1
 apiversion: 2
+architectures: armv7 i386 arm64
 description: dfp
 author: Jason Priebe
 license: Apache License, Version 2.0
