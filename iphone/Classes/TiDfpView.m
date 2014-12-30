@@ -250,7 +250,14 @@
 
 - (void)adViewDidReceiveAd:(GADBannerView *)view
 {
-    [self.proxy fireEvent:@"ad_received"];
+    NSLog(@"[DEBUG] [TiDfpView] ad_received %@", NSStringFromCGSize(view.frame.size));
+    
+    NSDictionary *evt = [NSDictionary dictionaryWithObjectsAndKeys:
+                           NUMFLOAT(view.frame.size.width), @"width",
+                           NUMFLOAT(view.frame.size.height), @"height",
+                        nil];
+    
+    [self.proxy fireEvent:@"ad_received" withObject: evt];
 }
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
