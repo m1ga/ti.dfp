@@ -31,8 +31,40 @@
     
     int width = [TiUtils intValue:[self.proxy valueForKey:@"adWidth"] def:0];
     int height = [TiUtils intValue:[self.proxy valueForKey:@"adHeight"] def:0];
+    
+    
+    // Define an optional array of NSDictionary to specify all valid sizes that are appropriate
+    // for this slot. Never create your own GADAdSize directly. Use one of the
+    // predefined standard ad sizes (such as kGADAdSizeBanner), or create one using
+    // the GADAdSizeFromCGSize method.
+    //
+    // Note: Ensure that the allocated DFPBannerView is defined with an ad size. Also note
+    // that all desired sizes should be included in the validAdSizes array.
+    //
+    // JS: adSizes: [
+    //     { width: 320, height: 100 },
+    //     { width: 320, height: 50 }
+    // ]
+    NSArray *adSizes = [self.proxy valueForKey:@"adSizes"];
+    NSMutableArray *validSizes = [NSMutableArray array];
 
-    if ((width > 0) && (height > 0))
+    if(adSizes != nil)
+    {
+        for (id object in adSizes) {
+            // Create ad with first adSize
+            if(ad == nil) {
+                NSLog(@"[DEBUG] [TiDfpView] multiple ad sizes");
+                
+                GADAdSize adsize = GADAdSizeFromCGSize(CGSizeMake([[object objectForKey:@"width"] floatValue], [[object objectForKey:@"height"] floatValue]));
+                ad = [[DFPBannerView alloc] initWithAdSize:adsize];
+            }
+            
+            GADAdSize adSize = GADAdSizeFromCGSize(CGSizeMake([[object objectForKey:@"width"] floatValue], [[object objectForKey:@"height"] floatValue]));
+            
+            [validSizes addObject:[NSValue valueWithBytes:&adSize objCType:@encode(GADAdSize)]];
+        }
+    }
+    else if ((width > 0) && (height > 0))
     {
         NSLog(@"[DEBUG] [TiDfpView] ad size: %dx%d", width, height);
         
@@ -51,6 +83,13 @@
         {
             ad = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape];
         }
+    }
+    
+    if(adSizes != nil)
+    {
+        ad.validAdSizes = validSizes;
+        
+        [ad setAdSizeDelegate:self];
     }
     
     if ([TiUtils boolValue:[self.proxy valueForKey:@"suppressScroll"] def:NO])
@@ -85,35 +124,6 @@
     // Let the runtime know which UIViewController to restore after taking
     // the user wherever the ad goes and add it to the view hierarchy.
     ad.rootViewController = [[TiApp app] controller];
-    
-    // Define an optional array of NSDictionary to specify all valid sizes that are appropriate
-    // for this slot. Never create your own GADAdSize directly. Use one of the
-    // predefined standard ad sizes (such as kGADAdSizeBanner), or create one using
-    // the GADAdSizeFromCGSize method.
-    //
-    // Note: Ensure that the allocated DFPBannerView is defined with an ad size. Also note
-    // that all desired sizes should be included in the validAdSizes array.
-    //
-    // JS: adSizes: [
-    //     { width: 320, height: 100 },
-    //     { width: 320, height: 50 }
-    // ]
-    NSArray *adSizes = [self.proxy valueForKey:@"adSizes"];
-    
-    if(adSizes != nil)
-    {
-        NSMutableArray *validSizes = [NSMutableArray array];
-        
-        for (id object in adSizes) {
-            GADAdSize adSize = GADAdSizeFromCGSize(CGSizeMake([[object objectForKey:@"width"] floatValue], [[object objectForKey:@"height"] floatValue]));
-            
-            [validSizes addObject:[NSValue valueWithBytes:&adSize objCType:@encode(GADAdSize)]];
-        }
-      
-        ad.validAdSizes = validSizes;
-    
-        [ad setAdSizeDelegate:self];
-    }
     
     // Tell continaer view to auto resize to ad dimensions
     autoResize = [TiUtils boolValue:[self.proxy valueForKey:@"autoResize"]];
@@ -257,7 +267,14 @@
 
 - (void)adViewDidReceiveAd:(GADBannerView *)view
 {
-    [self.proxy fireEvent:@"ad_received"];
+    NSLog(@"[DEBUG] [TiDfpView] ad_received %@", NSStringFromCGSize(view.frame.size));
+    
+    NSDictionary *evt = [NSDictionary dictionaryWithObjectsAndKeys:
+                           NUMFLOAT(view.frame.size.width), @"width",
+                           NUMFLOAT(view.frame.size.height), @"height",
+                        nil];
+    
+    [self.proxy fireEvent:@"ad_received" withObject: evt];
 }
 
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
