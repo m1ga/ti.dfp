@@ -75,7 +75,14 @@
     {
         NSLog(@"[DEBUG] [TiDfpView] ad size: SMART_BANNER");
         
-        ad = [[DFPBannerView alloc] initWithFrame:bounds];
+        if (width>=height)
+        {
+            ad = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+        }
+        else
+        {
+            ad = [[DFPBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerLandscape];
+        }
     }
     
     if(adSizes != nil)
@@ -121,7 +128,7 @@
     // Tell continaer view to auto resize to ad dimensions
     autoResize = [TiUtils boolValue:[self.proxy valueForKey:@"autoResize"]];
     
-    NSLog(@"[DEBUG] [TiDfpView] auroResize set %@", (autoResize ? @"Yes" : @"No"));
+    NSLog(@"[DEBUG] [TiDfpView] autoResize set %@", (autoResize ? @"Yes" : @"No"));
     
     // Initiate a generic request to load it with an ad.
     GADRequest* request = [GADRequest request];

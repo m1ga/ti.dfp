@@ -1,3 +1,12 @@
+1.1.0 - December 29, 2014
+
+- Merged pull request #5 from ddyy to make adWidth/adHeight work on iOS and to add smart banner size support for iOS
+
+- Merged pull request #6 from timanrebel to add support for multiple ad sizes on iOS and 64-bit support
+
+- Merged pull request #7 from timanrebel to add support for multiple ad sizes on android
+
+
 1.0.1 - November 18, 2014
 
 - Android: Updated to version 20 of google play services to match ti.cloudpush
