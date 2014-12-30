@@ -19,6 +19,7 @@ import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
 
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.AdSize;
 
 @Kroll.module(name="Dfp", id="ti.dfp")
 public class DfpModule extends KrollModule
@@ -50,6 +51,8 @@ public class DfpModule extends KrollModule
  
  	public static Integer ADHEIGHT = 0;
  	public static Integer ADWIDTH = 0;
+    
+    public static AdSize[] AD_SIZES;
 
 	// *
 	public static String PROPERTY_COLOR_BG =     "adBackgroundColor";
