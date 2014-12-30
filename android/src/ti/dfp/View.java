@@ -8,6 +8,7 @@ import org.appcelerator.titanium.view.TiUIView;
 import android.os.Bundle;
 import android.location.Location;
 import java.util.Map;
+import java.util.HashMap;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
@@ -15,8 +16,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.android.gms.ads.mediation.admob.AdMobExtras;
-
-import java.lang.reflect.Method;
 
 public class View extends TiUIView {
 	private static final String TAG = "ti.dfp.View";
@@ -71,8 +70,12 @@ public class View extends TiUIView {
 		    // set the listener
 		    adView.setAdListener(new AdListener() {
 			    public void onAdLoaded() {
+                   HashMap<String, Integer> map = new HashMap<String, Integer>();
+                    map.put("width", new Integer(adView.getWidth()));
+                    map.put("height", new Integer(adView.getHeight()));
+                    
 				    Log.d (TAG, "onAdLoaded() " + adView.getWidth() + ", " + adView.getHeight());
-				    proxy.fireEvent("ad_received", new KrollDict());
+				    proxy.fireEvent("ad_received", new KrollDict(map));
 			    }
 			
 			    public void onAdFailedToLoad(int errorCode) {
