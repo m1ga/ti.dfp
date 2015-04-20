@@ -6,13 +6,7 @@
  */
 
 #import "TiUIView.h"
-#import "DFPBannerView.h"
-#import "GADBannerViewDelegate.h"
-#import "GADAdMobExtras.h"
-
-@protocol GADAdSizeDelegate <NSObject>
-- (void)adView:(DFPBannerView *)view willChangeAdSizeTo:(GADAdSize)size;
-@end
+@import GoogleMobileAds;
 
 @interface TiDfpView : TiUIView<GADBannerViewDelegate, GADAdSizeDelegate> {
 

@@ -4,6 +4,17 @@ var win = Titanium.UI.createWindow({
 
 var dfp = require('ti.dfp');
 
+// You can get your physical device's id for testDevices by looking 
+// in the console log after the app launched; note that on iOS,
+// the simulator automatically gets test ads (since version 7 of GoogleMobileAds SDK);
+// on android, you have to explicitly specify that the emulator should
+// get test ads by adding dfp.EMULATOR_ID to the testDevices
+var testDevices = [ ];
+if (Ti.Platform.osname === 'android')
+{
+    testDevices.push (dfp.EMULATOR_ID);
+}
+
 // then create an dfp view
 var dfpView = dfp.createView({
     top: 0, 
@@ -32,10 +43,11 @@ var dfpView = dfp.createView({
     textColor:          "#000000", 
     urlColor:           "#00FF00", 
     linkColor:          "#0000FF", 
-    
+
     // You can get your physical device's id for testDevices by looking 
-    // in the console log after the app launched
-    testDevices: [ dfp.EMULATOR_ID ],
+    // in the console log after the app launched; the simulator automatically
+    // gets test ads (since version 7 of GoogleMobileAds SDK)
+    testDevices: testDevices,
     
     customTargeting: {
         key1: 'value1',

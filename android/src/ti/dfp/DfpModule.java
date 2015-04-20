@@ -33,12 +33,8 @@ public class DfpModule extends KrollModule
     // [exec] jni/ti.dfp.DfpModule.cpp: In static member function 'static v8::Handle<v8::FunctionTemplate> ti::dfp::DfpModule::getProxyTemplate()':
     // [exec] jni/ti.dfp.DfpModule.cpp:113:3: error: no matching function for call to 'v8::String::New(_jobject*&)'
     
-    // define both EMULATOR_ID and SIMULATOR_ID so that the same code can run on both
-    // iOS and android
 	@Kroll.constant
 	public static final String EMULATOR_ID = "[[[[[ -- PublisherAdRequest.DEVICE_ID_EMULATOR -- ]]]]]";
-	@Kroll.constant
-	public static final String SIMULATOR_ID = "[[[[[ -- PublisherAdRequest.DEVICE_ID_EMULATOR -- ]]]]]";
 
 	public static String[] TEST_DEVICES = {};
 	public static String ADUNIT_ID;

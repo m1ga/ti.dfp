@@ -26,26 +26,7 @@
 		1729D92619C202A900BC19B8 /* TiDfpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1729D92219C202A900BC19B8 /* TiDfpView.m */; };
 		1729D92719C202A900BC19B8 /* TiDfpViewProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D92319C202A900BC19B8 /* TiDfpViewProxy.h */; };
 		1729D92819C202A900BC19B8 /* TiDfpViewProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1729D92419C202A900BC19B8 /* TiDfpViewProxy.m */; };
-		1729D93F19C2031300BC19B8 /* DFPBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D92A19C2031300BC19B8 /* DFPBannerView.h */; };
-		1729D94019C2031300BC19B8 /* DFPExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D92B19C2031300BC19B8 /* DFPExtras.h */; };
-		1729D94119C2031300BC19B8 /* DFPInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D92C19C2031300BC19B8 /* DFPInterstitial.h */; };
-		1729D94219C2031300BC19B8 /* DFPSwipeableBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D92D19C2031300BC19B8 /* DFPSwipeableBannerView.h */; };
-		1729D94319C2031300BC19B8 /* GADAdMobExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D92E19C2031300BC19B8 /* GADAdMobExtras.h */; };
-		1729D94419C2031300BC19B8 /* GADAdNetworkExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D92F19C2031300BC19B8 /* GADAdNetworkExtras.h */; };
-		1729D94519C2031300BC19B8 /* GADAdSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93019C2031300BC19B8 /* GADAdSize.h */; };
-		1729D94619C2031300BC19B8 /* GADAdSizeDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93119C2031300BC19B8 /* GADAdSizeDelegate.h */; };
-		1729D94719C2031300BC19B8 /* GADAppEventDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93219C2031300BC19B8 /* GADAppEventDelegate.h */; };
-		1729D94819C2031300BC19B8 /* GADBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93319C2031300BC19B8 /* GADBannerView.h */; };
-		1729D94919C2031300BC19B8 /* GADBannerViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93419C2031300BC19B8 /* GADBannerViewDelegate.h */; };
-		1729D94A19C2031300BC19B8 /* GADInAppPurchase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93519C2031300BC19B8 /* GADInAppPurchase.h */; };
-		1729D94B19C2031300BC19B8 /* GADInAppPurchaseDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93619C2031300BC19B8 /* GADInAppPurchaseDelegate.h */; };
-		1729D94C19C2031300BC19B8 /* GADInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93719C2031300BC19B8 /* GADInterstitial.h */; };
-		1729D94D19C2031300BC19B8 /* GADInterstitialDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93819C2031300BC19B8 /* GADInterstitialDelegate.h */; };
-		1729D94E19C2031300BC19B8 /* GADModules.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93919C2031300BC19B8 /* GADModules.h */; };
-		1729D94F19C2031300BC19B8 /* GADRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93A19C2031300BC19B8 /* GADRequest.h */; };
-		1729D95019C2031300BC19B8 /* GADRequestError.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93B19C2031300BC19B8 /* GADRequestError.h */; };
-		1729D95119C2031300BC19B8 /* GADSwipeableBannerViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1729D93C19C2031300BC19B8 /* GADSwipeableBannerViewDelegate.h */; };
-		1729D95219C2031300BC19B8 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1729D93D19C2031300BC19B8 /* libGoogleAdMobAds.a */; };
+		17B086B91AE57A2200A1D1F2 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B086B81AE57A2200A1D1F2 /* GoogleMobileAds.framework */; };
 		24DD6CF91134B3F500162E58 /* TiDfpModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiDfpModule.h */; };
 		24DD6CFA1134B3F500162E58 /* TiDfpModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiDfpModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* TiDfpModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiDfpModuleAssets.h */; };
@@ -69,27 +50,7 @@
 		1729D92219C202A900BC19B8 /* TiDfpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiDfpView.m; path = Classes/TiDfpView.m; sourceTree = "<group>"; };
 		1729D92319C202A900BC19B8 /* TiDfpViewProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiDfpViewProxy.h; path = Classes/TiDfpViewProxy.h; sourceTree = "<group>"; };
 		1729D92419C202A900BC19B8 /* TiDfpViewProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiDfpViewProxy.m; path = Classes/TiDfpViewProxy.m; sourceTree = "<group>"; };
-		1729D92A19C2031300BC19B8 /* DFPBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPBannerView.h; sourceTree = "<group>"; };
-		1729D92B19C2031300BC19B8 /* DFPExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPExtras.h; sourceTree = "<group>"; };
-		1729D92C19C2031300BC19B8 /* DFPInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPInterstitial.h; sourceTree = "<group>"; };
-		1729D92D19C2031300BC19B8 /* DFPSwipeableBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFPSwipeableBannerView.h; sourceTree = "<group>"; };
-		1729D92E19C2031300BC19B8 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
-		1729D92F19C2031300BC19B8 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		1729D93019C2031300BC19B8 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
-		1729D93119C2031300BC19B8 /* GADAdSizeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSizeDelegate.h; sourceTree = "<group>"; };
-		1729D93219C2031300BC19B8 /* GADAppEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAppEventDelegate.h; sourceTree = "<group>"; };
-		1729D93319C2031300BC19B8 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		1729D93419C2031300BC19B8 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		1729D93519C2031300BC19B8 /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
-		1729D93619C2031300BC19B8 /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
-		1729D93719C2031300BC19B8 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		1729D93819C2031300BC19B8 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		1729D93919C2031300BC19B8 /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
-		1729D93A19C2031300BC19B8 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		1729D93B19C2031300BC19B8 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		1729D93C19C2031300BC19B8 /* GADSwipeableBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSwipeableBannerViewDelegate.h; sourceTree = "<group>"; };
-		1729D93D19C2031300BC19B8 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		1729D93E19C2031300BC19B8 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		17B086B81AE57A2200A1D1F2 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = platform/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		24DD6CF71134B3F500162E58 /* TiDfpModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiDfpModule.h; path = Classes/TiDfpModule.h; sourceTree = "<group>"; };
 		24DD6CF81134B3F500162E58 /* TiDfpModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiDfpModule.m; path = Classes/TiDfpModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
@@ -105,8 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17B086B91AE57A2200A1D1F2 /* GoogleMobileAds.framework in Frameworks */,
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
-				1729D95219C2031300BC19B8 /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +85,7 @@
 		0867D691FE84028FC02AAC07 /* dfp */ = {
 			isa = PBXGroup;
 			children = (
-				1729D92919C2031300BC19B8 /* GoogleMobileAdsSdkiOS */,
+				17B086B81AE57A2200A1D1F2 /* GoogleMobileAds.framework */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -156,34 +117,6 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		1729D92919C2031300BC19B8 /* GoogleMobileAdsSdkiOS */ = {
-			isa = PBXGroup;
-			children = (
-				1729D92A19C2031300BC19B8 /* DFPBannerView.h */,
-				1729D92B19C2031300BC19B8 /* DFPExtras.h */,
-				1729D92C19C2031300BC19B8 /* DFPInterstitial.h */,
-				1729D92D19C2031300BC19B8 /* DFPSwipeableBannerView.h */,
-				1729D92E19C2031300BC19B8 /* GADAdMobExtras.h */,
-				1729D92F19C2031300BC19B8 /* GADAdNetworkExtras.h */,
-				1729D93019C2031300BC19B8 /* GADAdSize.h */,
-				1729D93119C2031300BC19B8 /* GADAdSizeDelegate.h */,
-				1729D93219C2031300BC19B8 /* GADAppEventDelegate.h */,
-				1729D93319C2031300BC19B8 /* GADBannerView.h */,
-				1729D93419C2031300BC19B8 /* GADBannerViewDelegate.h */,
-				1729D93519C2031300BC19B8 /* GADInAppPurchase.h */,
-				1729D93619C2031300BC19B8 /* GADInAppPurchaseDelegate.h */,
-				1729D93719C2031300BC19B8 /* GADInterstitial.h */,
-				1729D93819C2031300BC19B8 /* GADInterstitialDelegate.h */,
-				1729D93919C2031300BC19B8 /* GADModules.h */,
-				1729D93A19C2031300BC19B8 /* GADRequest.h */,
-				1729D93B19C2031300BC19B8 /* GADRequestError.h */,
-				1729D93C19C2031300BC19B8 /* GADSwipeableBannerViewDelegate.h */,
-				1729D93D19C2031300BC19B8 /* libGoogleAdMobAds.a */,
-				1729D93E19C2031300BC19B8 /* README.txt */,
-			);
-			path = GoogleMobileAdsSdkiOS;
-			sourceTree = "<group>";
-		};
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,29 +134,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA747D9F0F9514B9006C5449 /* TiDfp_Prefix.pch in Headers */,
-				1729D94519C2031300BC19B8 /* GADAdSize.h in Headers */,
 				24DD6CF91134B3F500162E58 /* TiDfpModule.h in Headers */,
-				1729D94719C2031300BC19B8 /* GADAppEventDelegate.h in Headers */,
-				1729D95119C2031300BC19B8 /* GADSwipeableBannerViewDelegate.h in Headers */,
-				1729D95019C2031300BC19B8 /* GADRequestError.h in Headers */,
-				1729D94219C2031300BC19B8 /* DFPSwipeableBannerView.h in Headers */,
-				1729D94919C2031300BC19B8 /* GADBannerViewDelegate.h in Headers */,
-				1729D93F19C2031300BC19B8 /* DFPBannerView.h in Headers */,
-				1729D94819C2031300BC19B8 /* GADBannerView.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* TiDfpModuleAssets.h in Headers */,
-				1729D94F19C2031300BC19B8 /* GADRequest.h in Headers */,
 				1729D92519C202A900BC19B8 /* TiDfpView.h in Headers */,
-				1729D94D19C2031300BC19B8 /* GADInterstitialDelegate.h in Headers */,
-				1729D94A19C2031300BC19B8 /* GADInAppPurchase.h in Headers */,
-				1729D94319C2031300BC19B8 /* GADAdMobExtras.h in Headers */,
-				1729D94419C2031300BC19B8 /* GADAdNetworkExtras.h in Headers */,
-				1729D94119C2031300BC19B8 /* DFPInterstitial.h in Headers */,
-				1729D94C19C2031300BC19B8 /* GADInterstitial.h in Headers */,
-				1729D94019C2031300BC19B8 /* DFPExtras.h in Headers */,
-				1729D94E19C2031300BC19B8 /* GADModules.h in Headers */,
 				1729D92719C202A900BC19B8 /* TiDfpViewProxy.h in Headers */,
-				1729D94B19C2031300BC19B8 /* GADInAppPurchaseDelegate.h in Headers */,
-				1729D94619C2031300BC19B8 /* GADAdSizeDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,9 +233,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/TiDfp.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/platform",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -350,6 +270,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Debug;
 		};
@@ -358,7 +279,13 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				DSTROOT = /tmp/TiDfp.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/platform",
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -383,6 +310,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Release;
 		};

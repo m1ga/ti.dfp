@@ -147,7 +147,7 @@
 
     bool has_extras = false;
     
-    GADAdMobExtras *extras = [[[GADAdMobExtras alloc] init] autorelease];
+    GADExtras *extras = [[[GADExtras alloc] init] autorelease];
     NSMutableDictionary *additionalParameters = [[[NSMutableDictionary alloc] init] autorelease];
     
     NSDictionary* customTargeting = [self.proxy valueForKey:@"customTargeting"];
