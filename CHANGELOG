@@ -1,3 +1,24 @@
+1.1.3 - April 20, 2015
+ 
+ - iOS: updated Google Mobile Ads SDK to 7.1.0
+ 
+ - android: updated Google Play Services to 7.0
+
+
+1.1.2 - April 10, 2015
+
+ - ios: Added x86_64 support
+
+
+1.1.1 - December 30, 2014
+
+ - Merged PR #8 from timanrebel:
+
+   - Added width/height to ad_received event, so it is easier to resize certain elements in the UI after loading an ad
+ 
+   - adSizes now takes preference over adWidth/adHeight. Previously in 1.1.0 when no adWidth/Height, but adSizes were given, it would not work.
+
+
 1.1.0 - December 29, 2014
 
 - Merged pull request #5 from ddyy to make adWidth/adHeight work on iOS and to add smart banner size support for iOS
