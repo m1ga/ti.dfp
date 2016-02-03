@@ -7,5 +7,5 @@
 // http://developer.apple.com/mac/library/documentation/DeveloperTools/Conceptual/XcodeBuildSystem/400-Build_Configurations/build_configs.html
 // 
 
-FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../../modules/iphone/ti.dfp/1.1.6/platform "~/Library/Application Support/Titanium/modules/iphone/ti.dfp/1.1.6/platform"
+FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../../modules/iphone/ti.dfp/1.1.7/platform "~/Library/Application Support/Titanium/modules/iphone/ti.dfp/1.1.7/platform"
 OTHER_LDFLAGS=$(inherited) -framework AdSupport -framework AudioToolbox -framework AVFoundation -framework CoreGraphics -framework CoreTelephony -framework MessageUI -framework StoreKit -framework SystemConfiguration -framework GoogleMobileAds
