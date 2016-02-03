@@ -14,12 +14,16 @@
 //! Project version string for GoogleMobileAds.
 FOUNDATION_EXPORT const unsigned char GoogleMobileAdsVersionString[];
 
+// Header files.
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
+#import <GoogleMobileAds/GADAdDelegate.h>
 #import <GoogleMobileAds/GADAdNetworkExtras.h>
 #import <GoogleMobileAds/GADAdSize.h>
 #import <GoogleMobileAds/GADBannerView.h>
 #import <GoogleMobileAds/GADBannerViewDelegate.h>
+#import <GoogleMobileAds/GADCorrelator.h>
+#import <GoogleMobileAds/GADCorrelatorAdLoaderOptions.h>
 #import <GoogleMobileAds/GADExtras.h>
 #import <GoogleMobileAds/GADInAppPurchase.h>
 #import <GoogleMobileAds/GADInAppPurchaseDelegate.h>
@@ -45,6 +49,7 @@ FOUNDATION_EXPORT const unsigned char GoogleMobileAdsVersionString[];
 #import <GoogleMobileAds/GADNativeAd.h>
 #import <GoogleMobileAds/GADNativeAdDelegate.h>
 #import <GoogleMobileAds/GADNativeAdImage.h>
+#import <GoogleMobileAds/GADNativeAdImage+Mediation.h>
 #import <GoogleMobileAds/GADNativeAppInstallAd.h>
 #import <GoogleMobileAds/GADNativeContentAd.h>
 #import <GoogleMobileAds/GADNativeCustomTemplateAd.h>
@@ -56,7 +61,14 @@ FOUNDATION_EXPORT const unsigned char GoogleMobileAdsVersionString[];
 #import <GoogleMobileAds/GADCustomEventExtras.h>
 #import <GoogleMobileAds/GADCustomEventInterstitial.h>
 #import <GoogleMobileAds/GADCustomEventInterstitialDelegate.h>
+#import <GoogleMobileAds/GADCustomEventNativeAd.h>
+#import <GoogleMobileAds/GADCustomEventNativeAdDelegate.h>
 #import <GoogleMobileAds/GADCustomEventRequest.h>
+#import <GoogleMobileAds/GADMediatedNativeAd.h>
+#import <GoogleMobileAds/GADMediatedNativeAdDelegate.h>
+#import <GoogleMobileAds/GADMediatedNativeAdNotificationSource.h>
+#import <GoogleMobileAds/GADMediatedNativeAppInstallAd.h>
+#import <GoogleMobileAds/GADMediatedNativeContentAd.h>
 
 #import <GoogleMobileAds/GADSearchBannerView.h>
 #import <GoogleMobileAds/GADSearchRequest.h>
