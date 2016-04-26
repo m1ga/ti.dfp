@@ -8,6 +8,8 @@
  */
 package ti.dfp;
 
+import java.io.IOException;
+
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 
@@ -20,6 +22,9 @@ import org.appcelerator.kroll.common.TiConfig;
 
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.AdSize;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 
 @Kroll.module(name="Dfp", id="ti.dfp")
 public class DfpModule extends KrollModule
@@ -81,5 +86,43 @@ public class DfpModule extends KrollModule
 		ADUNIT_ID = adUnitId;
 	}
 
+    @Kroll.method
+    public String getAdvertisingId ()
+    {
+        AdvertisingIdClient.Info adInfo = null;
+ 
+        try {
+             adInfo = AdvertisingIdClient.getAdvertisingIdInfo(TiApplication.getInstance());
+        } catch (Exception e) {
+             return "";
+        }
+ 
+        return adInfo.getId();
+    }
+
+    @Kroll.method
+    public boolean getAdTrackingDisabled ()
+    {
+        AdvertisingIdClient.Info adInfo = null;
+ 
+        try {
+             adInfo = AdvertisingIdClient.getAdvertisingIdInfo(TiApplication.getInstance());
+        } catch (Exception e) {
+             return false;
+        }
+ 
+        boolean retval = adInfo.isLimitAdTrackingEnabled();
+
+        if (retval)
+        {
+		    Log.d(LCAT, "isLimitAdTrackingEnabled() = true");
+        }
+        else
+        {
+		    Log.d(LCAT, "isLimitAdTrackingEnabled() = false");
+        }
+
+        return retval;
+    }
 }
 

@@ -2,7 +2,10 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.1.5
+# ----------------------------------------------------------------------
+# DON'T FORGET TO CHANGE THE VERSION STRING IN THE module.xcconfig!!!
+# ----------------------------------------------------------------------
+version: 1.1.7
 apiversion: 2
 architectures: armv7 arm64 i386 x86_64
 description: Doubleclick for Publishers module for Titanium
@@ -15,4 +18,4 @@ name: dfp
 moduleid: ti.dfp
 guid: bc1a28ac-353d-47bc-bc54-fb9bf7387a36
 platform: iphone
-minsdk: 3.5.1.GA
+minsdk: 5.2.2.GA

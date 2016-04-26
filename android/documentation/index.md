@@ -38,6 +38,14 @@ To access this module from JavaScript, do the following:
 
 ## Functions
 
+### ti.dfp.getAdvertisingId()
+
+Gets the Advertising Identifier
+
+### ti.dfp.getAdTrackingDisabled()
+
+Gets a boolean value indicating whether ad tracking has been disabled by the user
+
 ### ti.dfp.createView({...})
 
 Creates and returns a [ti.dfp.View][] object which displays ads.

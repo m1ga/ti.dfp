@@ -62,4 +62,52 @@
 	[super didReceiveMemoryWarning:notification];
 }
 
+#pragma Public APIs
+
+
+/**
+ * Returns an alphanumeric string unique to each device, used only for serving advertisements.
+ * Discussion:
+ * This identifier may change—for example, if the user erases the device—so you should not cache it.
+ * If the value is nil, wait and get the value again later. This happens, for example, after the device has been restarted but before the user has unlocked the device.
+ * Availability
+ * Available in iOS 6.0 and later.
+ * Declared In
+ * ASIdentifierManager.h
+ */
+-(NSString *) advertisingId {
+    Class ASIdentifierManagerClass = NSClassFromString(@"ASIdentifierManager");
+    if (ASIdentifierManagerClass) {
+        id identifierManager = [ASIdentifierManagerClass sharedManager];
+        if ([ASIdentifierManagerClass instancesRespondToSelector:@selector(advertisingIdentifier)]) {
+            id adID = [identifierManager performSelector:@selector(advertisingIdentifier)];
+            return [adID performSelector:@selector(UUIDString)]; // you can use this sUDID as an alternative to UDID
+        }
+    }
+    return @"";
+}
+
+
+/**
+ * Returns a Boolean value that indicates whether the user has limited ad tracking.
+ * Discussion:
+ * Check the value of this property before performing any advertising tracking. If the value is TRUe, use the advertising identifier only for the following purposes: frequency capping, conversion events, estimating the number of unique users, security and fraud detection, and debugging.
+ * Availability:
+ * Available in iOS 6.0 and later.
+ * Declared In:
+ * ASIdentifierManager.h
+ */
+- (id) adTrackingDisabled
+{
+    Class advertisingManagerClass = NSClassFromString(@"ASIdentifierManager");
+    if ([advertisingManagerClass respondsToSelector:@selector(sharedManager)]){
+        id advertisingManager = [[advertisingManagerClass class] performSelector:@selector(sharedManager)];
+        
+        if ([advertisingManager respondsToSelector:@selector(isAdvertisingTrackingEnabled)]){
+            return NUMBOOL(![advertisingManager performSelector:@selector(isAdvertisingTrackingEnabled)]);
+        }
+    }
+    return NUMBOOL(YES);
+}
+
 @end

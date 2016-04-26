@@ -27,6 +27,6 @@
 // 
 
 
-FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../../modules/iphone/ti.dfp/1.1.5/platform
+FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../../modules/iphone/ti.dfp/1.1.7/platform
 
 OTHER_LDFLAGS=$(inherited) -framework AdSupport -framework AudioToolbox -framework AVFoundation -framework CoreGraphics -framework CoreTelephony -framework MessageUI -framework StoreKit -framework SystemConfiguration -framework GoogleMobileAds
