@@ -33,26 +33,26 @@ public class View extends TiUIView {
 
 	public View(final TiViewProxy proxy) {
 		super(proxy);
-		Log.d (TAG, "Creating DFP adview...");
+		Log.d (TAG, "[ti.dfp] Creating DFP adview...");
 	}
 
 	private void createView() {
 
         try
         {
-		    Log.d (TAG, "createView()");
+		    Log.d (TAG, "[ti.dfp] createView()");
             // create the adView
             adView = new PublisherAdView(proxy.getActivity());
 
             if(DfpModule.AD_SIZES != null)
             {
-                Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: multiple");
+                Log.d (TAG, "[ti.dfp] createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: multiple");
                 
                 adView.setAdSizes(DfpModule.AD_SIZES);
             }
             else if ((DfpModule.ADWIDTH > 0) && (DfpModule.ADHEIGHT > 0))
             {
-                Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID 
+                Log.d (TAG, "[ti.dfp] createView() Ad Unit: " + DfpModule.ADUNIT_ID 
                     + ", size: " + DfpModule.ADWIDTH 
                     + "x" + DfpModule.ADHEIGHT);
 
@@ -61,7 +61,7 @@ public class View extends TiUIView {
             }
             else
             {
-                 Log.d (TAG, "createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: SMART_BANNER");
+                 Log.d (TAG, "[ti.dfp] createView() Ad Unit: " + DfpModule.ADUNIT_ID + ", size: SMART_BANNER");
 		         adView.setAdSizes(AdSize.SMART_BANNER);
                 
             }
@@ -74,27 +74,27 @@ public class View extends TiUIView {
                     map.put("width", new Integer(adView.getWidth()));
                     map.put("height", new Integer(adView.getHeight()));
                     
-				    Log.d (TAG, "onAdLoaded() " + adView.getWidth() + ", " + adView.getHeight());
+				    Log.d (TAG, "[ti.dfp] onAdLoaded() " + adView.getWidth() + ", " + adView.getHeight());
 				    proxy.fireEvent("ad_received", new KrollDict(map));
 			    }
 			
 			    public void onAdFailedToLoad(int errorCode) {
-				    Log.d (TAG, "onAdFailedToLoad(): " + errorCode);
+				    Log.d (TAG, "[ti.dfp] onAdFailedToLoad(): " + errorCode);
 				    proxy.fireEvent("ad_not_received", new KrollDict());
 			    }
 
 			    public void onAdOpened () {
-				    Log.d (TAG, "onAdOpened()");
+				    Log.d (TAG, "[ti.dfp] onAdOpened()");
 				    proxy.fireEvent("ad_opened", new KrollDict());
 			    }
 
 			    public void onAdClosed () {
-				    Log.d (TAG, "onAdClosed()");
+				    Log.d (TAG, "[ti.dfp] onAdClosed()");
 				    proxy.fireEvent("ad_closed", new KrollDict());
 			    }
 
 			    public void onAdLeftApplicadtion () {
-				    Log.d (TAG, "onAdLeftApplicadtion()");
+				    Log.d (TAG, "[ti.dfp] onAdLeftApplicadtion()");
 				    proxy.fireEvent("leave_application", new KrollDict());
 			    }
 		    });
@@ -106,15 +106,15 @@ public class View extends TiUIView {
         }
         catch (IllegalStateException e)
         {
-		    Log.w (TAG, "EXCEPTION (IllegalStateException): " + e.getMessage ());
+		    Log.w (TAG, "[ti.dfp] EXCEPTION (IllegalStateException): " + e.getMessage ());
         }
         catch (Exception e)
         {
-		    Log.w (TAG, "EXCEPTION: " + e.getMessage ());
+		    Log.w (TAG, "[ti.dfp] EXCEPTION: " + e.getMessage ());
         }
 	}
 
-	// load the adMob ad
+	// load the DFP ad
 	public void loadAd() 
     {
 		proxy.getActivity().runOnUiThread(new Runnable() {
@@ -126,7 +126,7 @@ public class View extends TiUIView {
                     adRequestBuilder.setLocation (DfpModule.LOCATION);
                 }
 
-				Log.d (TAG, "requestAd ()");
+				Log.d (TAG, "[ti.dfp] requestAd ()");
 				if (DfpModule.TEST_DEVICES != null) 
                 {
                     for (String s: DfpModule.TEST_DEVICES)
@@ -144,7 +144,7 @@ public class View extends TiUIView {
 
 				Bundle bundle = createAdRequestProperties();
 				if (bundle.size() > 0) {
-					Log.d (TAG, "extras.size() > 0 -- set ad properties");
+					Log.d (TAG, "[ti.dfp] extras.size() > 0 -- set ad properties");
 					adRequestBuilder.addNetworkExtras(new AdMobExtras(bundle));
 				}
 
@@ -157,34 +157,34 @@ public class View extends TiUIView {
 	@Override
 	public void processProperties(KrollDict d) {
 		super.processProperties(d);
-		Log.d (TAG, "process properties");
+		Log.d (TAG, "[ti.dfp] process properties");
 		if (d.containsKey("adUnitId")) {
-			Log.d (TAG, "has adUnitId: " + d.getString("adUnitId"));
+			Log.d (TAG, "[ti.dfp] has adUnitId: " + d.getString("adUnitId"));
 			DfpModule.ADUNIT_ID = d.getString("adUnitId");
 		}
 		if (d.containsKey("adHeight")) {
- 			Log.d (TAG, "has adHeight: " + d.getInt("adHeight"));
+ 			Log.d (TAG, "[ti.dfp] has adHeight: " + d.getInt("adHeight"));
  			DfpModule.ADHEIGHT = d.getInt("adHeight");
  		}
  		if (d.containsKey("adWidth")) {
- 			Log.d (TAG, "has adWidth: " + d.getInt("adWidth"));
+ 			Log.d (TAG, "[ti.dfp] has adWidth: " + d.getInt("adWidth"));
  			DfpModule.ADWIDTH = d.getInt("adWidth");
  		}
 		if (d.containsKey("testDevices")) {
-			Log.d (TAG, "has test devices");
+			Log.d (TAG, "[ti.dfp] has test devices");
 			DfpModule.TEST_DEVICES = d.getStringArray("testDevices");
 		}
  		if (d.containsKey("suppressScroll")) {
- 			Log.d (TAG, "has suppressScroll param: " + d.getBoolean("suppressScroll"));
+ 			Log.d (TAG, "[ti.dfp] has suppressScroll param: " + d.getBoolean("suppressScroll"));
  			DfpModule.SUPPRESS_SCROLL = d.getBoolean("suppressScroll");
  		}
  		if (d.containsKey("customTargeting")) {
             KrollDict ct = d.getKrollDict("customTargeting");
             Bundle b = new Bundle ();
- 			Log.d (TAG, "has " + ct.size () + " items in customTargeting dictionary:");
+ 			Log.d (TAG, "[ti.dfp] has " + ct.size () + " items in customTargeting dictionary:");
             for (Map.Entry<String, Object> entry : ct.entrySet())
             {
- 			    Log.d  (TAG, " - " + entry.getKey() + " => " + entry.getValue ());
+ 			    Log.d  (TAG, "[ti.dfp]  - " + entry.getKey() + " => " + entry.getValue ());
                 b.putString (entry.getKey(), entry.getValue().toString ());
             }
             DfpModule.CUSTOM_TARGETING = b;
@@ -197,39 +197,39 @@ public class View extends TiUIView {
             l.setLongitude(ld.getDouble ("longitude"));
             l.setAccuracy(ld.getDouble ("accuracy").floatValue ());
 
- 			Log.d (TAG, "has location:");
- 			Log.d (TAG, "  - latitude:  " + ld.getDouble ("latitude").toString ());
- 			Log.d (TAG, "  - longitude: " + ld.getDouble ("longitude").toString ());
- 			Log.d (TAG, "  - accuracy:  " + ld.getDouble ("accuracy").toString ());
+ 			Log.d (TAG, "[ti.dfp] has location:");
+ 			Log.d (TAG, "[ti.dfp]   - latitude:  " + ld.getDouble ("latitude").toString ());
+ 			Log.d (TAG, "[ti.dfp]   - longitude: " + ld.getDouble ("longitude").toString ());
+ 			Log.d (TAG, "[ti.dfp]   - accuracy:  " + ld.getDouble ("accuracy").toString ());
             DfpModule.LOCATION = l;
  		}
 		if (d.containsKey(DfpModule.PROPERTY_COLOR_BG)) {
-			Log.d (TAG, "has PROPERTY_COLOR_BG: " + d.getString(DfpModule.PROPERTY_COLOR_BG));
+			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BG: " + d.getString(DfpModule.PROPERTY_COLOR_BG));
 			prop_color_bg = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BG));
 		}
 		if (d.containsKey(DfpModule.PROPERTY_COLOR_BG_TOP)) {
-			Log.d (TAG, "has PROPERTY_COLOR_BG_TOP: " + d.getString(DfpModule.PROPERTY_COLOR_BG_TOP));
+			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BG_TOP: " + d.getString(DfpModule.PROPERTY_COLOR_BG_TOP));
 			prop_color_bg_top = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BG_TOP));
 		}
 		if (d.containsKey(DfpModule.PROPERTY_COLOR_BORDER)) {
-			Log.d (TAG, "has PROPERTY_COLOR_BORDER: " + d.getString(DfpModule.PROPERTY_COLOR_BORDER));
+			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BORDER: " + d.getString(DfpModule.PROPERTY_COLOR_BORDER));
 			prop_color_border = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BORDER));
 		}
 		if (d.containsKey(DfpModule.PROPERTY_COLOR_TEXT)) {
-			Log.d (TAG, "has PROPERTY_COLOR_TEXT: " + d.getString(DfpModule.PROPERTY_COLOR_TEXT));
+			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_TEXT: " + d.getString(DfpModule.PROPERTY_COLOR_TEXT));
 			prop_color_text = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_TEXT));
 		}
 		if (d.containsKey(DfpModule.PROPERTY_COLOR_LINK)) {
-			Log.d (TAG, "has PROPERTY_COLOR_LINK: " + d.getString(DfpModule.PROPERTY_COLOR_LINK));
+			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_LINK: " + d.getString(DfpModule.PROPERTY_COLOR_LINK));
 			prop_color_link = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_LINK));
 		}
 		if (d.containsKey(DfpModule.PROPERTY_COLOR_URL)) {
-			Log.d (TAG, "has PROPERTY_COLOR_URL: " + d.getString(DfpModule.PROPERTY_COLOR_URL));
+			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_URL: " + d.getString(DfpModule.PROPERTY_COLOR_URL));
 			prop_color_url = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_URL));
 		}
         
         if (d.containsKey("adSizes")) {
-            Log.d (TAG, "has adSizes:");
+            Log.d (TAG, "[ti.dfp] has adSizes:");
             
             Object[] adSizes = (Object[]) d.get("adSizes");
             
@@ -240,7 +240,7 @@ public class View extends TiUIView {
                 Map<String,Integer> hm = (Map<String,Integer>) adSizes[i];
                 
                 // You now have a HashMap!
-                Log.d (TAG, "" + hm);
+                Log.d (TAG, "[ti.dfp] " + hm);
                 
                 DfpModule.AD_SIZES[i] = new AdSize(hm.get("width"), hm.get("height"));
             }
@@ -252,23 +252,23 @@ public class View extends TiUIView {
 	}
 
 	public void pause() {
-		Log.d (TAG, "pause");
+		Log.d (TAG, "[ti.dfp] pause");
 		adView.pause();
 	}
 
 	public void resume() {
-		Log.d (TAG, "resume");
+		Log.d (TAG, "[ti.dfp] resume");
 		adView.resume();
 	}
 
 	public void destroy() {
-		Log.d (TAG, "destroy");
+		Log.d (TAG, "[ti.dfp] destroy");
 		adView.destroy();
 	}
 
 	// pass the method the TESTING flag
 	public void requestAd() {
-		Log.d (TAG, "requestAd()");
+		Log.d (TAG, "[ti.dfp] requestAd()");
 		loadAd();
 	}
 

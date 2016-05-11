@@ -11,8 +11,8 @@ import android.app.Activity;
 
 @Kroll.proxy(creatableInModule = DfpModule.class)
 public class ViewProxy extends TiViewProxy implements OnLifecycleEvent {
-	private View adMob;
-	private static final String TAG = "AdMobViewProxy";
+	private View dfpView;
+	private static final String TAG = "DfpViewProxy";
 
 	public ViewProxy() {
 		super();
@@ -27,29 +27,29 @@ public class ViewProxy extends TiViewProxy implements OnLifecycleEvent {
 
 	@Override
 	public TiUIView createView(Activity activity) {
-		adMob = new View(this);
-		return adMob;
+		dfpView = new View(this);
+		return dfpView;
 	}
 
 	@Kroll.method
 	public void requestAd() {
-		Log.d(TAG, "requestAd()");
-		adMob.requestAd();
+		Log.d(TAG, "[ti.dfp] requestAd()");
+		dfpView.requestAd();
 	}
 
 	@Override
 	public void onDestroy(Activity activity) {
-		adMob.destroy();
+		dfpView.destroy();
 	}
 
 	@Override
 	public void onPause(Activity activity) {
-		adMob.pause();
+		dfpView.pause();
 	}
 
 	@Override
 	public void onResume(Activity activity) {
-		adMob.resume();
+		dfpView.resume();
 	}
 
 	@Override

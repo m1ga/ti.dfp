@@ -24,6 +24,7 @@ import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.AdSize;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 
 @Kroll.module(name="Dfp", id="ti.dfp")
@@ -63,66 +64,105 @@ public class DfpModule extends KrollModule
 	public static String PROPERTY_COLOR_LINK =   "linkColor";
 	public static String PROPERTY_COLOR_URL =    "urlColor";
 
+    private String advertisingId = "";
+    private boolean adTrackingDisabled = false;
+
+
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant public static final String EXTERNAL_NAME = value;
 
 	public DfpModule()
 	{
 		super();
-		Log.d(LCAT, "module instantiated");
+
+		Log.d (LCAT, "[ti.dfp] starting new thread to get advertising ID");
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    AdvertisingIdClient.Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(TiApplication.getInstance());
+                    finished (adInfo);
+                    return;
+                } 
+                catch (IOException e) {
+		            Log.w (LCAT, "[ti.dfp] call to getAdvertisingInfo() failed; could not make connection to google play services");
+                }
+                catch (IllegalStateException e) {
+		            Log.w (LCAT, "[ti.dfp] call to getAdvertisingInfo() failed; method called on main thread");
+                }
+                catch (GooglePlayServicesNotAvailableException e) {
+		            Log.w (LCAT, "[ti.dfp] call to getAdvertisingInfo() failed; google play services not available");
+                }
+                catch (GooglePlayServicesRepairableException e) {
+		            Log.w (LCAT, "[ti.dfp] call to getAdvertisingInfo() failed; recoverable error connecting to google play services");
+                }
+    
+                finished (null);
+            }
+        });
+        t.start();
+
+		Log.d (LCAT, "[ti.dfp] module instantiated");
 	}
+
+
+    private void finished(final AdvertisingIdClient.Info adInfo)
+    {
+        if (adInfo == null)
+        {
+		    Log.d (LCAT, "[ti.dfp] got null advertisingInfo");
+            return;
+        }
+
+        Log.d (LCAT, "[ti.dfp] got non-null advertisingInfo...");
+        advertisingId = adInfo.getId();
+        Log.d (LCAT, "[ti.dfp] adInfo.getId(): " + advertisingId);
+        adTrackingDisabled = adInfo.isLimitAdTrackingEnabled();
+        if (adTrackingDisabled)
+        {
+            Log.d (LCAT, "[ti.dfp] adInfo.isLimitAdTrackingEnabled(): true");
+        }
+        else
+        {
+            Log.d (LCAT, "[ti.dfp] adInfo.isLimitAdTrackingEnabled(): false");
+        }
+        return;
+    }
+
 
 	@Kroll.onAppCreate
 	public static void onAppCreate(TiApplication app)
 	{
-		Log.d(LCAT, "inside onAppCreate");
+		Log.d (LCAT, "[ti.dfp] inside onAppCreate");
 		// put module init code that needs to run when the application is created
 	}
 
 	// must be done before the call to instantiate the view
 	@Kroll.method
 	public void setAdUnitId(String adUnitId) {
-		Log.d(LCAT, "setAdUnitId(): " + adUnitId);
+		Log.d (LCAT, "[ti.dfp] setAdUnitId(): " + adUnitId);
 		ADUNIT_ID = adUnitId;
 	}
 
     @Kroll.method
     public String getAdvertisingId ()
     {
-        AdvertisingIdClient.Info adInfo = null;
- 
-        try {
-             adInfo = AdvertisingIdClient.getAdvertisingIdInfo(TiApplication.getInstance());
-        } catch (Exception e) {
-             return "";
-        }
- 
-        return adInfo.getId();
+		Log.d (LCAT, "[ti.dfp] getAdvertisingId(): " + advertisingId);
+        return advertisingId;
     }
 
     @Kroll.method
     public boolean getAdTrackingDisabled ()
     {
-        AdvertisingIdClient.Info adInfo = null;
- 
-        try {
-             adInfo = AdvertisingIdClient.getAdvertisingIdInfo(TiApplication.getInstance());
-        } catch (Exception e) {
-             return false;
-        }
- 
-        boolean retval = adInfo.isLimitAdTrackingEnabled();
-
-        if (retval)
+        if (adTrackingDisabled)
         {
-		    Log.d(LCAT, "isLimitAdTrackingEnabled() = true");
+            Log.d (LCAT, "[ti.dfp] getAdTrackingDisabled(): true");
         }
         else
         {
-		    Log.d(LCAT, "isLimitAdTrackingEnabled() = false");
+            Log.d (LCAT, "[ti.dfp] getAdTrackingDisabled(): false");
         }
-
-        return retval;
+        return adTrackingDisabled;
     }
 }
 
