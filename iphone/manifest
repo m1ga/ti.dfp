@@ -5,7 +5,7 @@
 # ----------------------------------------------------------------------
 # DON'T FORGET TO CHANGE THE VERSION STRING IN THE module.xcconfig!!!
 # ----------------------------------------------------------------------
-version: 1.1.7
+version: 1.1.8
 apiversion: 2
 architectures: armv7 arm64 i386 x86_64
 description: Doubleclick for Publishers module for Titanium
