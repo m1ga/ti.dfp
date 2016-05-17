@@ -13,13 +13,10 @@
 #import <GoogleMobileAds/GADNativeAdImage.h>
 #import <GoogleMobileAds/GoogleMobileAdsDefines.h>
 
-// For use with GADAdLoader's creation methods. If you request this ad type, your delegate must
-// conform to the GADNativeAppInstallAdRequestDelegate protocol.
-//
-// See GADNativeAdImageAdLoaderOptions.h for ad loader image options.
-GAD_EXTERN NSString *const kGADAdLoaderAdTypeNativeAppInstall;
-
-/// Native app install ad.
+/// Native app install ad. To request this ad type, you need to pass
+/// kGADAdLoaderAdTypeNativeAppInstall (see GADAdLoaderAdTypes.h) to the |adTypes| parameter in
+/// GADAdLoader's initializer method. If you request this ad type, your delegate must conform to the
+/// GADNativeAppInstallAdRequestDelegate protocol.
 @interface GADNativeAppInstallAd : GADNativeAd
 
 #pragma mark - Must be displayed
@@ -43,7 +40,6 @@ GAD_EXTERN NSString *const kGADAdLoaderAdTypeNativeAppInstall;
 @property(nonatomic, readonly, strong) NSArray *images;
 /// App store rating (0 to 5).
 @property(nonatomic, readonly, copy) NSDecimalNumber *starRating;
-
 @end
 
 #pragma mark - Protocol and constants

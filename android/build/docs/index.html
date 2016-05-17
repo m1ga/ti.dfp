@@ -1,0 +1,97 @@
+<h1>ti.dfp Module</h1>
+<h2>Description</h2>
+<p>Allows for the display of DFP ads in Titanium Android applications. </p>
+<p>Please note that if your androidManifest has screen support set to: </p>
+<pre><code>android:anyDensity="false",
+</code></pre>
+<p>any banner ads will display too small on high density devices. 
+It is not clear at this point if this is a bug with DFP or Titanium. 
+In any event, you will either need to NOT set your screen support -- 
+or set android:anyDensity="true" and adjust your app layout accordingly</p>
+<h2>Getting Started</h2>
+<p>View the <a href="http://docs.appcelerator.com/titanium/latest/#!/guide/Using_Titanium_Modules">Using Titanium Modules</a> 
+document for instructions on getting started with using this module in your application.</p>
+<h2>Requirements</h2>
+<p>Add this to the &lt;android /&gt; node in tiapp.xml: </p>
+<pre><code>&lt;android&gt;
+    &lt;tool-api-level&gt;14&lt;/tool-api-level&gt;
+&lt;/android&gt;
+</code></pre>
+<h2>Accessing the ti.dfp Module</h2>
+<p>To access this module from JavaScript, do the following:</p>
+<pre><code>var dfp = require('ti.dfp');
+</code></pre>
+<h2>Doubleclick for Publishers Developer Docs</h2>
+<p><a href="https://developers.google.com/mobile-ads-sdk/">https://developers.google.com/mobile-ads-sdk/</a></p>
+<h2>Functions</h2>
+<h3>ti.dfp.getAdvertisingId()</h3>
+<p>Gets the Advertising Identifier</p>
+<h3>ti.dfp.getAdTrackingDisabled()</h3>
+<p>Gets a boolean value indicating whether ad tracking has been disabled by the user</p>
+<h3>ti.dfp.createView({...})</h3>
+<p>Creates and returns a [ti.dfp.View][] object which displays ads.</p>
+<h4>Arguments</h4>
+<p>parameters[object]: a dictionary object of properties defined in [ti.dfp.View][].</p>
+<h4>Example:</h4>
+<pre><code>// You can get your physical device's id for testDevices by looking
+// in the console log after the app launched; note that on iOS,
+// the simulator automatically gets test ads (since version 7 of GoogleMobileAds SDK);
+// on android, you have to explicitly specify that the emulator should
+// get test ads by adding dfp.EMULATOR_ID to the testDevices
+var testDevices = [ ];
+if (Ti.Platform.osname === 'android')
+{
+    testDevices.push (dfp.EMULATOR_ID);
+}
+
+var dfpView = dfp.createView({
+    top: 0, 
+    left: 0,
+    width: 320, 
+    height: 50,
+
+    adUnitId: "&lt;&lt;AD UNIT ID&gt;&gt;",
+
+    // all parameters below are optional
+
+    // you can explicitly specify an ad size; by default, will use DFP's SMART_BANNER mechanism
+    adWidth: 320,
+    adHeight: 50,
+
+    adBackgroundColor:  "#FF8800", 
+    backgroundColorTop: "#738000", 
+    borderColor:        "#000000", 
+    textColor:          "#000000", 
+    urlColor:           "#00FF00", 
+    linkColor:          "#0000FF",
+
+    // You can get your physical device's id for testDevices by looking
+    // in the console log after the app launched; the simulator automatically
+    // gets test ads (since version 7 of GoogleMobileAds SDK)
+    testDevices: testDevices,
+
+    customTargeting: {
+        key1: 'value1',
+        key2: 'value2'
+    },
+
+    location: {
+        latitude: 35.779511,
+        longitude:  -78.674045,
+        accuracy: 10
+    },
+
+    // Support the following ad sizes (MultipleAdSizes feature of DFP SDK)
+    adSizes: [
+        { width: 320, height: 100 },
+        { width: 320, height: 50 },
+        { width: 300, height: 250 },
+        { width: 728, height: 90 }
+    ],
+
+    // Resize view to dimensions of the displayed ad
+    autoResize: true
+});
+</code></pre>
+<h2>Module History</h2>
+<p>This module is based off the Titanium ti.admob module</p>

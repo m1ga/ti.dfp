@@ -1,0 +1,73 @@
+<h1>ti.dfp.View</h1>
+<h2>Description</h2>
+<p>A view for displaying ads delivered through DFP.</p>
+<h2>Properties</h2>
+<h3>string adUnitId</h3>
+<p>The ad Unit ID for DFP.</p>
+<h3>string adWidth (optional)</h3>
+<h3>string adHeight (optional)</h3>
+<p>Width and height of desired ad banner (in pixels -- you cannot use unit modifiers here).</p>
+<p>If both adWidth and adHeight are non-zero, the module will use them to
+explicitly specify the ad size.</p>
+<p>Otherwise, use DFP's SMART_BANNER mechanism to find the appropriate creative size.</p>
+<h3>string adBackgroundColor (optional)</h3>
+<p>The background color used for the ad.  </p>
+<p>Must be a 6-digit hex string.  Can be specified with or without the "#" symbol, 
+e.g. "#ffffff" or "ffffff" are valid.</p>
+<h3>string borderColor (optional)</h3>
+<p>The border color surrounding the ad.</p>
+<p>Must be a 6-digit hex string.  Can be specified with or without the "#" symbol, 
+e.g. "#ffffff" or "ffffff" are valid.</p>
+<h3>string textColor (optional)</h3>
+<p>The color of text used in text ads.</p>
+<p>Must be a 6-digit hex string.  Can be specified with or without the "#" symbol, 
+e.g. "#ffffff" or "ffffff" are valid.</p>
+<h3>string urlColor (optional)</h3>
+<p>The color of URLs used in text ads.</p>
+<p>Must be a 6-digit hex string.  Can be specified with or without the "#" symbol, 
+e.g. "#ffffff" or "ffffff" are valid.</p>
+<h3>string linkColor (optional)</h3>
+<p>The color of links used in text ads.</p>
+<p>Must be a 6-digit hex string.  Can be specified with or without the "#" symbol, 
+e.g. "#ffffff" or "ffffff" are valid.</p>
+<h3>Array[String] testDevices (optional)</h3>
+<p>An array of test device ids. Adding the id of a test device to this array 
+will allow that device to be served test ads. </p>
+<p>Use the module constant <code>SIMULATOR_ID</code> to use the simulator as a test device. 
+If you do not know the id for your device, launch your app and request an ad 
+like you normally would, then look in the console for the id. </p>
+<p>eg. <Google> To get test ads on this device, call: request.testDevices = @[ @"980bb6fbbb6687047c631fe21136869b" ];</p>
+<p>Add the id to the array passed to <code>testDevices</code>.</p>
+<h3>object location (optional)</h3>
+<p>A dictionary with the location of the user for location-based ads:</p>
+<ul>
+<li>float latitude</li>
+<li>float longitude</li>
+<li>float accuracy</li>
+</ul>
+<h3>object customTargeting (optional)</h3>
+<p>A dictionary with custom key-value pairs used for targeting ads.</p>
+<h3>array adSizes (optional)</h3>
+<p>An array of dictionaries to set the <a href="https://developers.google.com/mobile-ads-sdk/docs/dfp/android/banner#multiple">MultipleAdSizes</a>.</p>
+<p><code>javascript
+[
+    {width: 320, height: 100},
+    {width: 320, height: 50}
+]</code></p>
+<h2>Events</h2>
+<h3>ad_received</h3>
+<p>Sent when an ad request loaded an ad.  This is a good opportunity to add this
+view to the hierarchy if it has not yet been added.  If the ad was received
+as a part of the server-side auto refreshing, you can examine the
+hasAutoRefreshed property of the view.</p>
+<h3>ad_not_received</h3>
+<p>Sent when an ad request failed.  Normally this is because no network
+connection was available or no ads were available (i.e. no fill).</p>
+<h3>ad_opened</h3>
+<p>Called when an ad opens an overlay that covers the screen.</p>
+<p>Use this opportunity to stop animations, time sensitive interactions, etc.</p>
+<h3>ad_closed</h3>
+<p>Called when the user is about to return to the application after clicking on an ad.</p>
+<p>Use this opportunity to restart anything you may have stopped as part of "ad_opened".</p>
+<h3>leave_application</h3>
+<p>Called when an ad leaves the application (e.g., to go to the browser).</p>

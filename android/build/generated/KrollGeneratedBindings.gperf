@@ -1,0 +1,18 @@
+%define lookup-function-name lookupGeneratedInit
+%define class-name DfpBindings
+%{
+
+#include <string.h>
+#include <v8.h>
+#include <KrollBindings.h>
+
+#include "ti.dfp.DfpModule.h"
+#include "ti.dfp.ViewProxy.h"
+
+
+%}
+struct titanium::bindings::BindEntry;
+%%
+ti.dfp.DfpModule, ::ti::dfp::DfpModule::bindProxy, ::ti::dfp::DfpModule::dispose
+ti.dfp.ViewProxy, ::ti::dfp::dfp::ViewProxy::bindProxy, ::ti::dfp::dfp::ViewProxy::dispose
+%%
