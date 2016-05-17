@@ -156,99 +156,108 @@ public class View extends TiUIView {
 
 	@Override
 	public void processProperties(KrollDict d) {
-		super.processProperties(d);
-		Log.d (TAG, "[ti.dfp] process properties");
-		if (d.containsKey("adUnitId")) {
-			Log.d (TAG, "[ti.dfp] has adUnitId: " + d.getString("adUnitId"));
-			DfpModule.ADUNIT_ID = d.getString("adUnitId");
-		}
-		if (d.containsKey("adHeight")) {
- 			Log.d (TAG, "[ti.dfp] has adHeight: " + d.getInt("adHeight"));
- 			DfpModule.ADHEIGHT = d.getInt("adHeight");
- 		}
- 		if (d.containsKey("adWidth")) {
- 			Log.d (TAG, "[ti.dfp] has adWidth: " + d.getInt("adWidth"));
- 			DfpModule.ADWIDTH = d.getInt("adWidth");
- 		}
-		if (d.containsKey("testDevices")) {
-			Log.d (TAG, "[ti.dfp] has test devices");
-			DfpModule.TEST_DEVICES = d.getStringArray("testDevices");
-		}
- 		if (d.containsKey("suppressScroll")) {
- 			Log.d (TAG, "[ti.dfp] has suppressScroll param: " + d.getBoolean("suppressScroll"));
- 			DfpModule.SUPPRESS_SCROLL = d.getBoolean("suppressScroll");
- 		}
- 		if (d.containsKey("customTargeting")) {
-            KrollDict ct = d.getKrollDict("customTargeting");
-            Bundle b = new Bundle ();
- 			Log.d (TAG, "[ti.dfp] has " + ct.size () + " items in customTargeting dictionary:");
-            for (Map.Entry<String, Object> entry : ct.entrySet())
-            {
- 			    Log.d  (TAG, "[ti.dfp]  - " + entry.getKey() + " => " + entry.getValue ());
-                b.putString (entry.getKey(), entry.getValue().toString ());
-            }
-            DfpModule.CUSTOM_TARGETING = b;
-        }
- 		if (d.containsKey("location")) {
-            KrollDict ld = d.getKrollDict("location");
+		try {
+			super.processProperties(d);
+			Log.d (TAG, "[ti.dfp] process properties");
+			if (d.containsKey("adUnitId")) {
+				Log.d (TAG, "[ti.dfp] has adUnitId: " + d.getString("adUnitId"));
+				DfpModule.ADUNIT_ID = d.getString("adUnitId");
+			}
+			if (d.containsKey("adHeight")) {
+ 				Log.d (TAG, "[ti.dfp] has adHeight: " + d.getInt("adHeight"));
+ 				DfpModule.ADHEIGHT = d.getInt("adHeight");
+ 			}
+ 			if (d.containsKey("adWidth")) {
+ 				Log.d (TAG, "[ti.dfp] has adWidth: " + d.getInt("adWidth"));
+ 				DfpModule.ADWIDTH = d.getInt("adWidth");
+ 			}
+			if (d.containsKey("testDevices")) {
+				Log.d (TAG, "[ti.dfp] has test devices");
+				DfpModule.TEST_DEVICES = d.getStringArray("testDevices");
+			}
+ 			if (d.containsKey("suppressScroll")) {
+ 				Log.d (TAG, "[ti.dfp] has suppressScroll param: " + d.getBoolean("suppressScroll"));
+ 				DfpModule.SUPPRESS_SCROLL = d.getBoolean("suppressScroll");
+ 			}
+ 			if (d.containsKey("customTargeting")) {
+				KrollDict ct = d.getKrollDict("customTargeting");
+				Bundle b = new Bundle ();
+				Log.d (TAG, "[ti.dfp] has " + ct.size () + " items in customTargeting dictionary:");
+				for (Map.Entry<String, Object> entry : ct.entrySet()) {
+					Object value = entry.getValue();
+					if (value != null) {
+						Log.d  (TAG, "[ti.dfp]  - " + entry.getKey() + " => " + value);
+						b.putString (entry.getKey(), value.toString());
+					}
+				}
+				DfpModule.CUSTOM_TARGETING = b;
+			}
 
-            Location l = new Location ("");
-            l.setLatitude(ld.getDouble ("latitude"));
-            l.setLongitude(ld.getDouble ("longitude"));
-            l.setAccuracy(ld.getDouble ("accuracy").floatValue ());
+			if (d.containsKey("location")) {
+				KrollDict ld = d.getKrollDict("location");
+            
+				if (!ld.isNull("latitude") && !ld.isNull("longitude") && !ld.isNull("accuracy")) {
 
- 			Log.d (TAG, "[ti.dfp] has location:");
- 			Log.d (TAG, "[ti.dfp]   - latitude:  " + ld.getDouble ("latitude").toString ());
- 			Log.d (TAG, "[ti.dfp]   - longitude: " + ld.getDouble ("longitude").toString ());
- 			Log.d (TAG, "[ti.dfp]   - accuracy:  " + ld.getDouble ("accuracy").toString ());
-            DfpModule.LOCATION = l;
- 		}
-		if (d.containsKey(DfpModule.PROPERTY_COLOR_BG)) {
-			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BG: " + d.getString(DfpModule.PROPERTY_COLOR_BG));
-			prop_color_bg = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BG));
-		}
-		if (d.containsKey(DfpModule.PROPERTY_COLOR_BG_TOP)) {
-			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BG_TOP: " + d.getString(DfpModule.PROPERTY_COLOR_BG_TOP));
-			prop_color_bg_top = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BG_TOP));
-		}
-		if (d.containsKey(DfpModule.PROPERTY_COLOR_BORDER)) {
-			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BORDER: " + d.getString(DfpModule.PROPERTY_COLOR_BORDER));
-			prop_color_border = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BORDER));
-		}
-		if (d.containsKey(DfpModule.PROPERTY_COLOR_TEXT)) {
-			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_TEXT: " + d.getString(DfpModule.PROPERTY_COLOR_TEXT));
-			prop_color_text = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_TEXT));
-		}
-		if (d.containsKey(DfpModule.PROPERTY_COLOR_LINK)) {
-			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_LINK: " + d.getString(DfpModule.PROPERTY_COLOR_LINK));
-			prop_color_link = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_LINK));
-		}
-		if (d.containsKey(DfpModule.PROPERTY_COLOR_URL)) {
-			Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_URL: " + d.getString(DfpModule.PROPERTY_COLOR_URL));
-			prop_color_url = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_URL));
-		}
+					Location l = new Location ("");
+					l.setLatitude(ld.getDouble ("latitude"));
+					l.setLongitude(ld.getDouble ("longitude"));
+					l.setAccuracy(ld.getDouble ("accuracy").floatValue ());
+
+ 					Log.d (TAG, "[ti.dfp] has location:");
+ 					Log.d (TAG, "[ti.dfp]   - latitude:  " + ld.getDouble ("latitude").toString ());
+ 					Log.d (TAG, "[ti.dfp]   - longitude: " + ld.getDouble ("longitude").toString ());
+					Log.d (TAG, "[ti.dfp]   - accuracy:  " + ld.getDouble ("accuracy").toString ());
+					DfpModule.LOCATION = l;
+				}
+ 			}
+			if (d.containsKey(DfpModule.PROPERTY_COLOR_BG)) {
+				Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BG: " + d.getString(DfpModule.PROPERTY_COLOR_BG));
+				prop_color_bg = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BG));
+			}
+			if (d.containsKey(DfpModule.PROPERTY_COLOR_BG_TOP)) {
+				Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BG_TOP: " + d.getString(DfpModule.PROPERTY_COLOR_BG_TOP));
+				prop_color_bg_top = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BG_TOP));
+			}
+			if (d.containsKey(DfpModule.PROPERTY_COLOR_BORDER)) {
+				Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_BORDER: " + d.getString(DfpModule.PROPERTY_COLOR_BORDER));
+				prop_color_border = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_BORDER));
+			}
+			if (d.containsKey(DfpModule.PROPERTY_COLOR_TEXT)) {
+				Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_TEXT: " + d.getString(DfpModule.PROPERTY_COLOR_TEXT));
+				prop_color_text = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_TEXT));
+			}
+			if (d.containsKey(DfpModule.PROPERTY_COLOR_LINK)) {
+				Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_LINK: " + d.getString(DfpModule.PROPERTY_COLOR_LINK));
+				prop_color_link = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_LINK));
+			}
+			if (d.containsKey(DfpModule.PROPERTY_COLOR_URL)) {
+				Log.d (TAG, "[ti.dfp] has PROPERTY_COLOR_URL: " + d.getString(DfpModule.PROPERTY_COLOR_URL));
+				prop_color_url = convertColorProp(d.getString(DfpModule.PROPERTY_COLOR_URL));
+			}
         
-        if (d.containsKey("adSizes")) {
-            Log.d (TAG, "[ti.dfp] has adSizes:");
+			if (d.containsKey("adSizes")) {
+				Log.d (TAG, "[ti.dfp] has adSizes:");
             
-            Object[] adSizes = (Object[]) d.get("adSizes");
+				Object[] adSizes = (Object[]) d.get("adSizes");
             
-            DfpModule.AD_SIZES = new AdSize[adSizes.length];
+				DfpModule.AD_SIZES = new AdSize[adSizes.length];
             
-            for (int i = 0; i < adSizes.length; i++)
-            {
-                Map<String,Integer> hm = (Map<String,Integer>) adSizes[i];
+				for (int i = 0; i < adSizes.length; i++) {
+					Map<String,Integer> hm = (Map<String,Integer>) adSizes[i];
                 
-                // You now have a HashMap!
-                Log.d (TAG, "[ti.dfp] " + hm);
+					// You now have a HashMap!
+					Log.d (TAG, "[ti.dfp] " + hm);
                 
-                DfpModule.AD_SIZES[i] = new AdSize(hm.get("width"), hm.get("height"));
-            }
-        }
+					DfpModule.AD_SIZES[i] = new AdSize(hm.get("width"), hm.get("height"));
+				}
+			}
 
-
-		// now create the adView
-		this.createView();
+			// now create the adView
+			this.createView();
+               }
+		catch (Exception e) {
+			Log.w (TAG, "[ti.dfp] EXCEPTION: " + e.getMessage ());
+		}
 	}
 
 	public void pause() {
