@@ -132,6 +132,12 @@
     
     // Initiate a generic request to load it with an ad.
     GADRequest* request = [GADRequest request];
+
+    // Test devices
+    NSArray *testDevices = [self.proxy valueForKey:@"testDevices"];
+    if (testDevices != nil) {
+        request.testDevices = testDevices;
+    }
     
     NSDictionary* location = [self.proxy valueForKey:@"location"];
     if (location != nil) {
