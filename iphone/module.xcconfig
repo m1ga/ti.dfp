@@ -27,5 +27,5 @@
 // 
 
 
-FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../../modules/iphone/ti.dfp/1.2.1/platform "~/Library/Application Support/Titanium/modules/iphone/ti.dfp/1.1.6/platform"
+FRAMEWORK_SEARCH_PATHS=$(SRCROOT)/../../modules/iphone/ti.dfp/1.2.2/platform "~/Library/Application Support/Titanium/modules/iphone/ti.dfp/1.2.2/platform"
 OTHER_LDFLAGS=$(inherited) -framework AdSupport -framework AudioToolbox -framework AVFoundation -framework CoreGraphics -framework CoreTelephony -framework MessageUI -framework StoreKit -framework SystemConfiguration -framework GoogleMobileAds
