@@ -9,6 +9,7 @@
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
+#import <AdSupport/AdSupport.h>
 
 @implementation TiDfpModule
 
