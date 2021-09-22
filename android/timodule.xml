@@ -18,7 +18,7 @@
         </manifest>
     </android>
     <modules>
-        <module platform="android" version="11.0.40">ti.playservices</module>
+        <module platform="android">ti.playservices</module>
     </modules>
 	<mobileweb>
 	</mobileweb>
